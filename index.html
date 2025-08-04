@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Angeles Coffee Shop Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background-color: #8B4513;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.1em;
+        }
+        .main-container {
+            display: flex;
+            height: 80vh;
+        }
+        .sidebar {
+            width: 400px;
+            background-color: #f8f8f8;
+            border-right: 2px solid #8B4513;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .sidebar h2 {
+            margin-top: 0;
+            color: #8B4513;
+            font-size: 1.4em;
+            border-bottom: 2px solid #8B4513;
+            padding-bottom: 10px;
+        }
+        .coffee-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .coffee-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+        .coffee-item:hover {
+            background-color: #f0f0f0;
+            border-left-color: #8B4513;
+            transform: translateX(5px);
+        }
+        .coffee-item.selected {
+            background-color: #e8d5c4;
+            border-left-color: #8B4513;
+        }
+        .coffee-item h3 {
+            margin: 0 0 8px 0;
+            color: #8B4513;
+            font-size: 1.1em;
+        }
+        .coffee-item p {
+            margin: 4px 0;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .coffee-item .rating {
+            color: #ff6b35;
+            font-weight: bold;
+        }
+        .detail-view {
+            display: none;
+            background-color: white;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .detail-view.active {
+            display: block;
+        }
+        .detail-view h3 {
+            color: #8B4513;
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        .detail-view .yelp-link {
+            background-color: #d32323;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        .detail-view .yelp-link:hover {
+            background-color: #b31e1e;
+        }
+        #map {
+            flex: 1;
+            height: 100%;
+        }
+        .coffee-popup {
+            font-family: Arial, sans-serif;
+        }
+        .coffee-popup h3 {
+            margin: 0 0 10px 0;
+            color: #8B4513;
+        }
+        .coffee-popup p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .coffee-popup .yelp-link {
+            background-color: #d32323;
+            color: white;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 12px;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            color: #8B4513;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>☕ Los Angeles Coffee Shop Map</h1>
+        <p>Discover the best coffee spots across the City of Angels</p>
+    </div>
+    <div class="main-container">
+        <div class="sidebar">
+            <h2>Coffee Shops</h2>
+            <ul class="coffee-list" id="coffee-list">
+                <li class="loading">Loading coffee shops...</li>
+            </ul>
+            <div class="detail-view" id="detail-view">
+                <!-- Detail view content will be populated by JavaScript -->
+            </div>
+        </div>
+        <div id="map">
+            <div class="loading">Loading map...</div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
